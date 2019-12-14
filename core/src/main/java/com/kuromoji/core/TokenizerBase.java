@@ -402,7 +402,7 @@ public abstract class TokenizerBase {
          * @param <T> token type
          * @return Tokenizer instance
          */
-        public abstract <T extends TokenizerBase> T build();
+        public abstract <T extends TokenizerBase> T build(Context context);
 
         /**
          * Sets an optional user dictionary as an input stream
