@@ -22,6 +22,7 @@ import com.kuromoji.core.util.ResourceResolver;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import android.content.Context;
 
 public class FST {
 
@@ -170,7 +171,7 @@ public class FST {
         return Bits.getInt(fst, arcAddress, accumulateBytes);
     }
 
-    public static FST newInstance(ResourceResolver resolver) throws IOException {
-        return new FST(resolver.resolve(FST_FILENAME));
+    public static FST newInstance(Context context, ResourceResolver resolver) throws IOException {
+        return new FST(resolver.resolve(context, FST_FILENAME));
     }
 }

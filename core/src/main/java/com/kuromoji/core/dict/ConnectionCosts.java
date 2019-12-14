@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ShortBuffer;
+import android.content.Context;
 
 public class ConnectionCosts {
 
@@ -43,8 +44,8 @@ public class ConnectionCosts {
         return costs.get(backwardId + forwardId * size);
     }
 
-    public static ConnectionCosts newInstance(ResourceResolver resolver) throws IOException {
-        return read(resolver.resolve(CONNECTION_COSTS_FILENAME));
+    public static ConnectionCosts newInstance(Context context, ResourceResolver resolver) throws IOException {
+        return read(resolver.resolve(context, CONNECTION_COSTS_FILENAME));
     }
 
     private static ConnectionCosts read(InputStream input) throws IOException {

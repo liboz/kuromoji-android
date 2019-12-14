@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
+import android.content.Context;
 
 /**
  * TokenizerBase main class
@@ -74,9 +75,9 @@ public abstract class TokenizerBase {
 
     protected EnumMap<ViterbiNode.Type, Dictionary> dictionaryMap = new EnumMap<>(ViterbiNode.Type.class);
 
-    protected void configure(Builder builder) {
+    protected void configure(Context context, Builder builder) {
 
-        builder.loadDictionaries();
+        builder.loadDictionaries(context);
 
         this.tokenFactory = builder.tokenFactory;
 
@@ -380,13 +381,13 @@ public abstract class TokenizerBase {
 
         protected TokenFactory tokenFactory;
 
-        protected void loadDictionaries() {
+        protected void loadDictionaries(Context context) {
             try {
-                fst = FST.newInstance(resolver);
-                connectionCosts = ConnectionCosts.newInstance(resolver);
-                tokenInfoDictionary = TokenInfoDictionary.newInstance(resolver);
-                characterDefinitions = CharacterDefinitions.newInstance(resolver);
-                unknownDictionary = UnknownDictionary.newInstance(
+                fst = FST.newInstance(context, resolver);
+                connectionCosts = ConnectionCosts.newInstance(context, resolver);
+                tokenInfoDictionary = TokenInfoDictionary.newInstance(context, resolver);
+                characterDefinitions = CharacterDefinitions.newInstance(context, resolver);
+                unknownDictionary = UnknownDictionary.newInstance(context,
                     resolver, characterDefinitions, totalFeatures
                 );
                 insertedDictionary = new InsertedDictionary(totalFeatures);

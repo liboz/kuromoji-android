@@ -22,6 +22,7 @@ import com.kuromoji.core.io.StringArrayIO;
 
 import java.io.IOException;
 import java.io.InputStream;
+import android.content.Context;
 
 public final class CharacterDefinitions {
 
@@ -66,8 +67,8 @@ public final class CharacterDefinitions {
         return categoryDefinitions[category];
     }
 
-    public static CharacterDefinitions newInstance(ResourceResolver resolver) throws IOException {
-        InputStream charDefInput = resolver.resolve(CHARACTER_DEFINITIONS_FILENAME);
+    public static CharacterDefinitions newInstance(Context context, ResourceResolver resolver) throws IOException {
+        InputStream charDefInput = resolver.resolve(context, CHARACTER_DEFINITIONS_FILENAME);
 
         int[][] definitions = IntegerArrayIO.readSparseArray2D(charDefInput);
         int[][] mappings = IntegerArrayIO.readSparseArray2D(charDefInput);

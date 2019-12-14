@@ -25,6 +25,7 @@ import com.kuromoji.core.util.ResourceResolver;
 import com.kuromoji.core.util.StringUtils;
 
 import java.io.IOException;
+import android.content.Context;
 
 public class TokenInfoDictionary implements Dictionary {
 
@@ -155,16 +156,16 @@ public class TokenInfoDictionary implements Dictionary {
         return StringUtils.join(features, FEATURE_SEPARATOR);
     }
 
-    public static TokenInfoDictionary newInstance(ResourceResolver resolver) throws IOException {
+    public static TokenInfoDictionary newInstance(Context context, ResourceResolver resolver) throws IOException {
         TokenInfoDictionary dictionary = new TokenInfoDictionary();
-        dictionary.setup(resolver);
+        dictionary.setup(context, resolver);
         return dictionary;
     }
 
-    private void setup(ResourceResolver resolver) throws IOException {
-        tokenInfoBuffer = new TokenInfoBuffer(resolver.resolve(TOKEN_INFO_DICTIONARY_FILENAME));
-        stringValues = new StringValueMapBuffer(resolver.resolve(FEATURE_MAP_FILENAME));
-        posValues = new StringValueMapBuffer(resolver.resolve(POS_MAP_FILENAME));
-        wordIdMap = new WordIdMap(resolver.resolve(TARGETMAP_FILENAME));
+    private void setup(Context context, ResourceResolver resolver) throws IOException {
+        tokenInfoBuffer = new TokenInfoBuffer(resolver.resolve(context, TOKEN_INFO_DICTIONARY_FILENAME));
+        stringValues = new StringValueMapBuffer(resolver.resolve(context, FEATURE_MAP_FILENAME));
+        posValues = new StringValueMapBuffer(resolver.resolve(context, POS_MAP_FILENAME));
+        wordIdMap = new WordIdMap(resolver.resolve(context, TARGETMAP_FILENAME));
     }
 }

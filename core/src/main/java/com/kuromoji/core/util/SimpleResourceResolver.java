@@ -18,19 +18,16 @@ package com.kuromoji.core.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import android.content.Context;
 
 public class SimpleResourceResolver implements ResourceResolver{
 
-    private Class<?> clazz;
-
-    public SimpleResourceResolver(Class<?> clazz) {
-        this.clazz = clazz;
+    public SimpleResourceResolver() {
     }
 
     @Override
-    public InputStream resolve(String resourceName) throws IOException {
-        //InputStream input = getContext().getAssets().open(resourceName);
-        InputStream input = clazz.getResourceAsStream(resourceName);
+    public InputStream resolve(Context context, String resourceName) throws IOException {
+        InputStream input = context.getAssets().open(resourceName);
         if (input == null) {
             throw new IOException("Classpath resource not found: " + resourceName);
         }

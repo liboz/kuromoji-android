@@ -23,6 +23,7 @@ import com.kuromoji.core.util.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import android.content.Context;
 
 public class UnknownDictionary implements Dictionary {
 
@@ -129,10 +130,10 @@ public class UnknownDictionary implements Dictionary {
         return characterDefinition;
     }
 
-    public static UnknownDictionary newInstance(ResourceResolver resolver,
+    public static UnknownDictionary newInstance(Context context, ResourceResolver resolver,
                                                 CharacterDefinitions characterDefinitions,
                                                 int totalFeatures) throws IOException {
-        InputStream unkDefInput = resolver.resolve(UnknownDictionary.UNKNOWN_DICTIONARY_FILENAME);
+        InputStream unkDefInput = resolver.resolve(context, UnknownDictionary.UNKNOWN_DICTIONARY_FILENAME);
 
         int[][] costs = IntegerArrayIO.readArray2D(unkDefInput);
         int[][] references = IntegerArrayIO.readArray2D(unkDefInput);

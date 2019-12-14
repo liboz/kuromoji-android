@@ -18,6 +18,7 @@ package com.kuromoji.core.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import android.content.Context;
 
 /**
  * An adapter to resolve the required resources into data streams.
@@ -30,5 +31,5 @@ public interface ResourceResolver {
    * @return resolved resource stream
    * @throws IOException if an I/O error occured resolving the resource
    */
-  InputStream resolve(String resourceName) throws IOException;
+  InputStream resolve(Context context, String resourceName) throws IOException;
 }
